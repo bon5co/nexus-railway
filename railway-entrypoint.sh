@@ -40,7 +40,7 @@ direct="${NEXUS_DIRECT_MB:-$((limit_mb * 30 / 100))}"
 [ "$direct" -lt 256 ] && direct=256
 echo "railway-entrypoint: container limit ${limit_mb} MB -> Xms=Xmx=${heap}m MaxDirectMemorySize=${direct}m, port ${PORT:-8081}"
 
-export INSTALL4J_ADD_VM_PARAMS="-Xms${heap}m -Xmx${heap}m -XX:MaxDirectMemorySize=${direct}m -Djava.util.prefs.userRoot=${DATA}/javaprefs -Dapplication-port=${PORT:-8081}"
+export INSTALL4J_ADD_VM_PARAMS="-Xms${heap}m -Xmx${heap}m -XX:MaxDirectMemorySize=${direct}m -Djava.util.prefs.userRoot=${DATA}/javaprefs -Dapplication-host=:: -Dapplication-port=${PORT:-8081}"
 
 if [ -z "${NEXUS_SECURITY_INITIAL_PASSWORD:-}" ]; then
   echo "railway-entrypoint: NEXUS_SECURITY_INITIAL_PASSWORD is unset; Nexus writes a random admin password to $DATA/admin.password on first boot"
